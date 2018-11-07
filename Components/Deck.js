@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { Text, View, Dimensions, TouchableOpacity } from 'react-native';
+import { withNavigation, SafeAreaView } from 'react-navigation';
 import DeckItem from './DeckItem';
 import styled from 'styled-components/native';
 
 const DeckView = styled.View`
-  height: 500;
+  height: 450;
   background-color: #E8862E;
   justify-content: center;
   align-items: center;
@@ -53,17 +54,34 @@ const SecondaryButton = styled.TouchableOpacity`
   shadow-opacity: .2;
 `
 
-const Deck = () => (
-  <View style={{alignItems: 'center'}}>
-    <DeckView style={{shadowOffset: {height: 10}, width: .95 * Dimensions.get('window').width}}>
-      <Title>JavaScript</Title>
-      <Subtitle>2 cards</Subtitle>
-    </DeckView>
-    <ButtonContainer>
-      <PrimaryButton style={{width: 175, shadowRadius: 5 ,shadowOffset: {height: 3}}}><Text style={{textAlign: 'center', color: 'white', fontSize: 25}}>Start Quiz</Text></PrimaryButton>
-      <SecondaryButton><Text style={{textAlign: 'center', color: '#DA2850', fontSize: 20}}>Add Card</Text></SecondaryButton>
-    </ButtonContainer>
-  </View>
-);
+class Deck extends Component {
+  static navigationOptions = ({ navigation }) => {
+    return {
+      title: navigation.state.params.title
+    }
+  }
 
-export default Deck;
+  render() {
+  SafeAreaView.setStatusBarHeight(0);
+  const { navigation } = this.props;
+  const { title, cards } = navigation.state.params;
+  return (
+    <View style={{alignItems: 'center', flex: 1}}>
+      <DeckView style={{shadowOffset: {height: 10}, width: .95 * Dimensions.get('window').width}}>
+        <Title>{ title }</Title>
+        <Subtitle>{ cards } { cards > 1 ? 'cards' : 'card' }</Subtitle>
+      </DeckView>
+      <ButtonContainer>
+        <PrimaryButton
+          onPress={() => navigation.navigate('Quiz', { deck: title })}
+          style={{width: 175, shadowRadius: 5 ,shadowOffset: {height: 3}}}>
+            <Text style={{textAlign: 'center', color: 'white', fontSize: 25}}>Start Quiz</Text>
+        </PrimaryButton>
+        <SecondaryButton><Text style={{textAlign: 'center', color: '#DA2850', fontSize: 20}}>Add Card</Text></SecondaryButton>
+      </ButtonContainer>
+    </View>
+    )
+  }
+};
+
+export default withNavigation(Deck);

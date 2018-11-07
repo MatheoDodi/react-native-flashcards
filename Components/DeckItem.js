@@ -1,5 +1,6 @@
 import React from 'react';
 import { TouchableOpacity, Dimensions } from 'react-native';
+import { withNavigation } from 'react-navigation';
 import styled from 'styled-components/native';
 
 const DeckView = styled.View`
@@ -7,11 +8,12 @@ const DeckView = styled.View`
   justify-content: center;
   align-items: center;
   padding: 10px;
-  border-radius: 10;
+  height: 150;
+  border-radius: 5;
   shadow-color: #000;
   shadow-radius: 6;
-  shadow-opacity: .4;
-  margin: 15px 0;
+  shadow-opacity: .25;
+  margin: 10px 0;
 `
 const Title = styled.Text`
   font-size: 35;
@@ -24,13 +26,15 @@ const Subtitle = styled.Text`
   color: #94B9D0;
 `
 
-const DeckItem = ({ title, cards, height }) => (
-  <TouchableOpacity>
-    <DeckView height={height} style={{shadowOffset: {height: 10}, width: .95 * Dimensions.get('window').width}}>
+const DeckItem = ({ title, cards, navigation }) => {
+return (
+  <TouchableOpacity onPress={() => navigation.navigate('Deck', { title, cards })}>
+    <DeckView style={{shadowOffset: {height: 10}, width: .95 * Dimensions.get('window').width}}>
       <Title>{title}</Title>
       <Subtitle>{cards} {cards > 1 ? 'cards' : 'card'}</Subtitle>
     </DeckView>
   </TouchableOpacity>
 )
+}
 
-export default DeckItem;
+export default withNavigation(DeckItem);

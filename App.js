@@ -2,19 +2,33 @@ import React from 'react';
 import { createStore } from 'redux';
 import { Provider } from 'react-redux';
 import { reducer } from './reducers';
-import { Text, View, StatusBar } from 'react-native';
+import { View, StatusBar } from 'react-native';
+import { createStackNavigator  } from 'react-navigation';
 import { Constants } from 'expo';
 import Home from './Containers/Home';
 import Deck from './Components/Deck';
-import styled from 'styled-components/native';
-
-const BackgroundImage = styled.ImageBackground`
-  position: absolute;
-  height: 100%;
-  width: 100%;
-`
+import Quiz from './Containers/Quiz';
 
 const store = createStore(reducer);
+
+const MainNavigator = createStackNavigator({
+  Home: {
+    screen: Home,
+  },
+  Deck: {
+    screen: Deck,
+  },
+  Quiz: {
+    screen: Quiz
+  }
+}, {
+  navigationOptions: {
+    headerTintColor: '#FFFFFF',
+    headerStyle: {
+      backgroundColor: '#DA2850',
+    }
+  }
+})
 
 class App extends React.Component {
 
@@ -22,14 +36,10 @@ class App extends React.Component {
     return (
       <Provider store={store}>
         <View style={{flex: 1}}>
-          <BackgroundImage 
-            source={require('./assets/memphis-colorful.png')}
-            resizeMode='repeat'>
             <View style={{height: Constants.statusBarHeight, backgroundColor: "#DA2850"}}>
               <StatusBar barStyle='light-content' hidden={false} translucent={true} />
             </View>
-              <Deck />
-          </BackgroundImage>
+              <MainNavigator />
         </View>
       </Provider>
     );
