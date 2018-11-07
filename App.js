@@ -2,13 +2,14 @@ import React from 'react';
 import { createStore } from 'redux';
 import { Provider } from 'react-redux';
 import { reducer } from './reducers';
-import { Text, View } from 'react-native';
+import { Text, View, StatusBar } from 'react-native';
+import { Constants } from 'expo';
 import Home from './Containers/Home';
+import Deck from './Components/Deck';
 import styled from 'styled-components/native';
 
 const BackgroundImage = styled.ImageBackground`
   position: absolute;
-  z-index: -1;
   height: 100%;
   width: 100%;
 `
@@ -24,8 +25,10 @@ class App extends React.Component {
           <BackgroundImage 
             source={require('./assets/memphis-colorful.png')}
             resizeMode='repeat'>
-              <Text>Test</Text>
-              <Home />
+            <View style={{height: Constants.statusBarHeight, backgroundColor: "#C14F43"}}>
+              <StatusBar barStyle = "light-content" hidden = {false} backgroundColor = "#00BCD4" translucent = {true} />
+            </View>
+              <Deck />
           </BackgroundImage>
         </View>
       </Provider>
