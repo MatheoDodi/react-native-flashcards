@@ -25,8 +25,8 @@ class App extends React.Component {
           <BackgroundImage 
             source={require('./assets/memphis-colorful.png')}
             resizeMode='repeat'>
-            <View style={{height: Constants.statusBarHeight, backgroundColor: "#C14F43"}}>
-              <StatusBar barStyle = "light-content" hidden = {false} backgroundColor = "#00BCD4" translucent = {true} />
+            <View style={{height: Constants.statusBarHeight, backgroundColor: "#DA2850"}}>
+              <StatusBar barStyle='light-content' hidden={false} translucent={true} />
             </View>
               <Deck />
           </BackgroundImage>

@@ -3,7 +3,7 @@ import { TouchableOpacity, Dimensions } from 'react-native';
 import styled from 'styled-components/native';
 
 const DeckView = styled.View`
-  background-color: #3168A5;
+  background-color: #E8862E;
   justify-content: center;
   align-items: center;
   padding: 10px;
