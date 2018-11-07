@@ -1,11 +1,11 @@
 import * as actionTypes from '../actions/actionTypes';
 
-export const reducer = (state = { test: 'test'}, action) => {
+export const reducer = (state = {}, action) => {
   switch (action.type) {
     case actionTypes.SET_DECKS :
       return {
         ...state,
-        decks
+        ...action.decks
       }
     // case actionTypes.GET_DECK :
     //   return {

@@ -3,20 +3,11 @@ import { createStore } from 'redux';
 import { Provider } from 'react-redux';
 import { reducer } from './reducers';
 import { Text, View } from 'react-native';
-import { getDecks } from './utils/helpers';
-import Home from './Components/Home';
+import Home from './Containers/Home';
 
 const store = createStore(reducer);
 
-export default class App extends React.Component {
-  state = {
-    data: null
-  }
-
-  componentDidMount() {
-    getDecks()
-      .then(res => console.log(res));
-  }
+class App extends React.Component {
 
   render() {
     return (
@@ -29,3 +20,5 @@ export default class App extends React.Component {
     );
   }
 };
+
+export default App;
