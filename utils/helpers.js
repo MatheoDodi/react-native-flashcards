@@ -50,5 +50,14 @@ const initialData = {
         answer: 'The combination of a function and the lexical environment within which that function was declared.'
       }
     ]
+  },
+  Node: {
+    title: 'Node',
+    questions: [
+      {
+        question: 'What is a closure?',
+        answer: 'The combination of a function and the lexical environment within which that function was declared.'
+      }
+    ]
   }
 };

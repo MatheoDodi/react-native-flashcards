@@ -6,6 +6,8 @@ import { setDecks } from '../actions'
 import DeckItem from '../Components/DeckItem';
 import styled from 'styled-components';
 
+const gradientsArray = [['#6190E8', '#A7BFE8'], ['#CAC531', '#F3F9A7'], ['#11998e', '#38ef7d']]
+
 const BackgroundImage = styled.ImageBackground`
   position: absolute;
   height: 100%;
@@ -35,8 +37,9 @@ class Home extends Component {
           <FlatList
             contentContainerStyle={{alignItems: 'center', width: Dimensions.get('window').width}}
             data={Object.keys(decks)}
-            renderItem={({ item }) => 
+            renderItem={({ item, index }) => 
               <DeckItem
+                gradient={gradientsArray[index]}
                 title={item}
                 cards={decks[item].questions.length} />}
             keyExtractor={(item, index) => item}

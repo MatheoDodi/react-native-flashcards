@@ -1,20 +1,25 @@
 import React from 'react';
-import { TouchableOpacity, Dimensions } from 'react-native';
+import { TouchableOpacity, Dimensions, StyleSheet } from 'react-native';
 import { withNavigation } from 'react-navigation';
+import { LinearGradient } from 'expo';
 import styled from 'styled-components/native';
 
-const DeckView = styled.View`
-  background-color: #E8862E;
-  justify-content: center;
-  align-items: center;
-  padding: 10px;
-  height: 150;
-  border-radius: 5;
-  shadow-color: #000;
-  shadow-radius: 6;
-  shadow-opacity: .25;
-  margin: 10px 0;
-`
+const styles = StyleSheet.create({
+  gradient : {
+  justifyContent: 'center',
+  alignItems: 'center',
+  padding: 10,
+  height: 150,
+  borderRadius: 5,
+  shadowColor: '#000',
+  shadowRadius: 6,
+  shadowOpacity: .25,
+  marginTop: 10,
+  marginBottom: 10,
+  shadowOffset: {height: 10}, 
+  width: .95 * Dimensions.get('window').width
+}});
+
 const Title = styled.Text`
   font-size: 35;
   margin-bottom: 10px;
@@ -26,13 +31,15 @@ const Subtitle = styled.Text`
   color: #94B9D0;
 `
 
-const DeckItem = ({ title, cards, navigation }) => {
+const DeckItem = ({ title, cards, navigation, gradient }) => {
 return (
-  <TouchableOpacity onPress={() => navigation.navigate('Deck', { title, cards })}>
-    <DeckView style={{shadowOffset: {height: 10}, width: .95 * Dimensions.get('window').width}}>
-      <Title>{title}</Title>
-      <Subtitle>{cards} {cards > 1 ? 'cards' : 'card'}</Subtitle>
-    </DeckView>
+  <TouchableOpacity onPress={() => navigation.navigate('Deck', { title, cards, gradient })}>
+    <LinearGradient 
+      style={styles.gradient}
+      colors={gradient}>
+        <Title>{title}</Title>
+        <Subtitle>{cards} {cards > 1 ? 'cards' : 'card'}</Subtitle>
+    </LinearGradient>
   </TouchableOpacity>
 )
 }

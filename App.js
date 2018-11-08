@@ -24,9 +24,6 @@ const MainNavigator = createStackNavigator({
 }, {
   navigationOptions: {
     headerTintColor: '#FFFFFF',
-    headerStyle: {
-      backgroundColor: '#DA2850',
-    }
   }
 })
 
@@ -36,8 +33,8 @@ class App extends React.Component {
     return (
       <Provider store={store}>
         <View style={{flex: 1}}>
-            <View style={{height: Constants.statusBarHeight, backgroundColor: "#DA2850"}}>
-              <StatusBar barStyle='light-content' hidden={false} translucent={true} />
+            <View style={{height: Constants.statusBarHeight, backgroundColor: "#E0EAFC"}}>
+              <StatusBar barStyle='dark-content' hidden={false} translucent={true} />
             </View>
               <MainNavigator />
         </View>

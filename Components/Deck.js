@@ -57,14 +57,17 @@ const SecondaryButton = styled.TouchableOpacity`
 class Deck extends Component {
   static navigationOptions = ({ navigation }) => {
     return {
-      title: navigation.state.params.title
+      title: navigation.state.params.title,
+      headerStyle: {
+        backgroundColor: navigation.state.params.gradient[0],
+      }
     }
   }
 
   render() {
   SafeAreaView.setStatusBarHeight(0);
   const { navigation } = this.props;
-  const { title, cards } = navigation.state.params;
+  const { title, cards, gradient } = navigation.state.params;
   return (
     <View style={{alignItems: 'center', flex: 1}}>
       <DeckView style={{shadowOffset: {height: 10}, width: .95 * Dimensions.get('window').width}}>
@@ -73,7 +76,7 @@ class Deck extends Component {
       </DeckView>
       <ButtonContainer>
         <PrimaryButton
-          onPress={() => navigation.navigate('Quiz', { deck: title })}
+          onPress={() => navigation.navigate('Quiz', { deck: title, gradient  })}
           style={{width: 175, shadowRadius: 5 ,shadowOffset: {height: 3}}}>
             <Text style={{textAlign: 'center', color: 'white', fontSize: 25}}>Start Quiz</Text>
         </PrimaryButton>
