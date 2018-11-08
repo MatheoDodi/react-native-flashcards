@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Text, TouchableOpacity, Dimensions } from 'react-native';
+import { View, Text, TouchableOpacity, Dimensions, Animated } from 'react-native';
 import styled from 'styled-components/native';
 
 const QuizCard = styled.View`
   padding: 5px;
-  background-color: #D4BDC2;
+  background-color: ${props => props.color};
   margin: 15px auto;
   width: 300;
   height: 460;
@@ -17,24 +17,30 @@ const QuizCard = styled.View`
   shadow-opacity: .25;
 `
 
+const AnswerButton = styled.TouchableOpacity`
+  margin: 5px;
+  background-color: #414345;
+  border: 1px solid ${props => props.color};
+  width: 150;
+  padding: 20px;
+  border-radius: 5;
+  shadow-color: ${props => props.color};
+  shadow-radius: 10;
+  shadow-opacity: .95;
+`
+
 const Title = styled.Text`
   text-align: center;
   font-size: 25;
   margin-bottom: 10px;
-  color: #DA2850;
+  color: #414345;
 `
 
 
 class Quiz extends Component {
-  static navigationOptions = ({ navigation }) => {
-    return {
-      headerStyle: {
-        backgroundColor: navigation.state.params.gradient[0],
-      }
-    }
-  }
   state = {
-    questionCounter : 0
+    questionCounter : 0,
+    flipAnimationValue : new Animated.Value(0)
   }
 
   nextQuestion = () => {
@@ -44,24 +50,29 @@ class Quiz extends Component {
   };
 
   render() {
-    const { questions } = this.props;
+    const { questions, gradient } = this.props;
+    console.log(gradient);
     const { questionCounter } = this.state;
     const question = questions[questionCounter] ? questions[questionCounter].question : null;
+
     return (
-      <QuizCard style={{shadowOffset: {height: 10}, width: .95 * Dimensions.get('window').width}}>
-        {question ? <Title>{question}</Title> : <Title>Done</Title> }
-        <TouchableOpacity onPress={this.nextQuestion}><Text>Next</Text></TouchableOpacity>
-      </QuizCard>
+      <View style={{flex: 1, alignItems: 'center'}}>
+        <QuizCard color={this.props.gradient[1]} style={{shadowOffset: {height: 10}, width: .95 * Dimensions.get('window').width}}>
+          {question ? <Title>{question}</Title> : <Title>Done</Title> }
+        </QuizCard>
+        <AnswerButton color={this.props.gradient[1]}><Text style={{textAlign: 'center', color: this.props.gradient[1], fontSize: 20}}>View Answer</Text></AnswerButton>
+      </View>
     );
   };
 };
 
 const mapStateToProps = (state, { navigation }) => {
-  const { deck } = navigation.state.params;
+  const { deck, gradient } = navigation.state.params;
   const questions = state[deck].questions;
 
   return {
     deck,
+    gradient,
     questions
   };
 };

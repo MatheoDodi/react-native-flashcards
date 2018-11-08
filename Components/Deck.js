@@ -1,21 +1,26 @@
 import React, { Component } from 'react';
-import { Text, View, Dimensions, TouchableOpacity } from 'react-native';
+import { Text, View, Dimensions, StyleSheet } from 'react-native';
 import { withNavigation, SafeAreaView } from 'react-navigation';
+import { LinearGradient } from 'expo'
 import DeckItem from './DeckItem';
 import styled from 'styled-components/native';
 
-const DeckView = styled.View`
-  height: 450;
-  background-color: #E8862E;
-  justify-content: center;
-  align-items: center;
-  padding: 10px;
-  border-radius: 10;
-  shadow-color: #000;
-  shadow-radius: 6;
-  shadow-opacity: .4;
-  margin: 15px 0;
-`
+const styles = StyleSheet.create({
+  gradient : {
+  justifyContent: 'center',
+  alignItems: 'center',
+  padding: 10,
+  height: 450,
+  borderRadius: 5,
+  shadowColor: '#000',
+  shadowRadius: 6,
+  shadowOpacity: .25,
+  marginTop: 10,
+  marginBottom: 10,
+  shadowOffset: {height: 10}, 
+  width: .95 * Dimensions.get('window').width
+}});
+
 const Title = styled.Text`
   font-size: 35;
   margin-bottom: 10px;
@@ -58,9 +63,6 @@ class Deck extends Component {
   static navigationOptions = ({ navigation }) => {
     return {
       title: navigation.state.params.title,
-      headerStyle: {
-        backgroundColor: navigation.state.params.gradient[0],
-      }
     }
   }
 
@@ -70,10 +72,10 @@ class Deck extends Component {
   const { title, cards, gradient } = navigation.state.params;
   return (
     <View style={{alignItems: 'center', flex: 1}}>
-      <DeckView style={{shadowOffset: {height: 10}, width: .95 * Dimensions.get('window').width}}>
+      <LinearGradient colors={gradient} style={styles.gradient}>
         <Title>{ title }</Title>
         <Subtitle>{ cards } { cards > 1 ? 'cards' : 'card' }</Subtitle>
-      </DeckView>
+      </LinearGradient>
       <ButtonContainer>
         <PrimaryButton
           onPress={() => navigation.navigate('Quiz', { deck: title, gradient  })}

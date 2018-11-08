@@ -30,9 +30,6 @@ class Home extends Component {
     const { decks } = this.props;
 
     return (
-      <BackgroundImage
-      source={require('../assets/memphis-colorful.png')}
-      resizeMode='repeat'>
         <View style={{alignItems: 'center', flex: 1}}>
           <FlatList
             contentContainerStyle={{alignItems: 'center', width: Dimensions.get('window').width}}
@@ -45,7 +42,6 @@ class Home extends Component {
             keyExtractor={(item, index) => item}
           />
       </View>
-      </BackgroundImage>
     );
   }
 };

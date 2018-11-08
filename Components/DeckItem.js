@@ -28,7 +28,7 @@ const Title = styled.Text`
 
 const Subtitle = styled.Text`
   font-size: 17;
-  color: #94B9D0;
+  color: #000000;
 `
 
 const DeckItem = ({ title, cards, navigation, gradient }) => {
