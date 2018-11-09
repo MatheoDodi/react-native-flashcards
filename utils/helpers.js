@@ -55,8 +55,8 @@ const initialData = {
     title: 'Node',
     questions: [
       {
-        question: 'What is a closure?',
-        answer: 'The combination of a function and the lexical environment within which that function was declared.'
+        question: 'What is Chaining in Node.js?',
+        answer: 'Chaining is a mechanism whereby the output of one stream is connected to another stream creating a chain of multiple stream operations.'
       }
     ]
   }

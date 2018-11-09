@@ -8,6 +8,7 @@ import { Constants } from 'expo';
 import Home from './Containers/Home';
 import Deck from './Components/Deck';
 import Quiz from './Containers/Quiz';
+import Results from './Components/Results';
 
 const store = createStore(reducer);
 
@@ -20,6 +21,12 @@ const MainNavigator = createStackNavigator({
   },
   Quiz: {
     screen: Quiz
+  },
+  Results: {
+    screen: Results,
+    navigationOptions: {
+      header: null
+    }
   }
 }, {
   navigationOptions: {

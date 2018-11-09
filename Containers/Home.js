@@ -4,15 +4,8 @@ import { View, Dimensions, FlatList, ImageBackground } from 'react-native';
 import { getDecks } from '../utils/helpers';
 import { setDecks } from '../actions'
 import DeckItem from '../Components/DeckItem';
-import styled from 'styled-components';
 
-const gradientsArray = [['#6190E8', '#A7BFE8'], ['#CAC531', '#F3F9A7'], ['#11998e', '#38ef7d']]
-
-const BackgroundImage = styled.ImageBackground`
-  position: absolute;
-  height: 100%;
-  width: 100%;
-`
+const gradientsArray = [['#6190E8', '#A7BFE8'], ['#CAC531', '#F3F9A7'], ['#11998e', '#38ef7d'], ['#C5796D', '#DBE6F6']];
 
 
 class Home extends Component {

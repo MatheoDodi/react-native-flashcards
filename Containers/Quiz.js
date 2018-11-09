@@ -70,10 +70,30 @@ class Quiz extends Component {
   nextQuestion = () => {
     this.setState(prevState => ({
       questionCounter: prevState.questionCounter + 1 
-    }) );
+    }));
+  };
+
+  rightAnswer = () => {
+    this.setState(prevState => ({
+      right: prevState.right + 1
+    }));
+  };
+
+  wrongAnswer = () => {
+    this.setState(prevState => ({
+      wrong: prevState.wrong + 1
+    }));
   };
 
   flipCard = () => {
+    if ( this.state.questionCounter + 1 === this.props.questions.length && this.state.animationValue >= 90 ) {
+      return this.props.navigation.push('Results', {
+        right: this.state.right,
+        total: this.props.questions.length,
+        deck: this.props.deck,
+        gradient: this.props.gradient
+      });
+    };
     if ( this.state.animationValue >= 90 ) {
       Animated.spring(this.state.rotate, {
         toValue: 0,
@@ -115,7 +135,7 @@ class Quiz extends Component {
         <View>
           <Animated.View 
             style={[styles.QuizCard, frontAnimatedStyle, {backgroundColor: this.props.gradient[1]}]}>
-              {question ? <Title>{question}</Title> : <Title>Done</Title> }
+              {question && <Title>{question}</Title>}
               <Text style={{marginTop: 20}}>
               {questionCounter + 1 > questions.length ? questions.length : questionCounter + 1} / {questions.length}
               </Text>
@@ -127,6 +147,10 @@ class Quiz extends Component {
             <Text style={{marginTop: 20}}>
               {questionCounter + 1 > questions.length ? questions.length : questionCounter + 1} / {questions.length}
             </Text>
+            <View style={{flexDirection: 'row', alignItems: 'center', marginTop: 20}}>
+              <TouchableOpacity onPress={this.rightAnswer} style={{flex: 1, padding: 20, backgroundColor: 'green', margin: 10, borderRadius: 5}}><Text style={{color: 'white', textAlign: 'center'}}>Correct</Text></TouchableOpacity>
+              <TouchableOpacity onPress={this.wrongAnswer} style={{flex: 1, padding: 20, backgroundColor: '#DA2850', margin: 10, borderRadius: 5}}><Text style={{color: 'white', textAlign: 'center'}}>Incorrect</Text></TouchableOpacity>
+            </View>
           </Animated.View>
         </View>
         <AnswerButton 
@@ -135,7 +159,8 @@ class Quiz extends Component {
             <Text style={{textAlign: 'center', color: this.props.gradient[1], fontSize: 20}}>
             { questionCounter + 1 === questions.length && this.state.animationValue >= 90
               ? 'View Results'
-              : this.state.animationValue >= 90 ? 'Next Question' : 'View Answer' }
+                : this.state.animationValue >= 90 
+                ? 'Next Question' : 'View Answer' }
             </Text>
         </AnswerButton>
       </View>
