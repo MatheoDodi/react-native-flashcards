@@ -43,14 +43,12 @@ const Drawer = createBottomTabNavigator({
   }
 }}, {
 	tabBarOptions: {
-		activeTintColor: 'white',
-		inactiveTintColor: 'lightgray',
-		style: {
-			backgroundColor: 'orange',
-			borderTopWidth: 1,
-			borderTopColor: 'white'
-		},
-	}
+    activeTintColor: '#F8F8F8', // active icon color
+    inactiveTintColor: '#586589',  // inactive icon color
+    style: {
+        backgroundColor: '#171F33' // TabBar background
+    }
+  }
 });
 
 const MainNavigator = createStackNavigator({
@@ -74,9 +72,9 @@ const MainNavigator = createStackNavigator({
   }
 }, {
   navigationOptions: {
-    headerTintColor: '#000000',
+    headerTintColor: '#FFFFFF',
     headerStyle: {
-      backgroundColor: "#E0EAFC"
+      backgroundColor: "#171F33"
     }
   }
 });
@@ -87,8 +85,8 @@ class App extends React.Component {
     return (
       <Provider store={store}>
         <View style={{flex: 1}}>
-            <View style={{height: Constants.statusBarHeight, backgroundColor: "#E0EAFC"}}>
-              <StatusBar barStyle='dark-content' hidden={false} translucent={true} />
+            <View style={{height: Constants.statusBarHeight, backgroundColor: "#171F33"}}>
+              <StatusBar barStyle='light-content' hidden={false} translucent={true} />
             </View>
               <MainNavigator />
         </View>

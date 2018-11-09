@@ -11,8 +11,20 @@ export function getDeck () {
 
 };
 
-export function saveDeckTitle () {
+export function saveDeckTitle (title) {
+  AsyncStorage.getItem(DATA_STORAGE_KEY)
+    .then(res => {
+      const data = JSON.parse(res);
+      const updatedData = {
+        ...data,
+        [title] : {
+          title,
+          questions: []
+        }
+      };
 
+      AsyncStorage.setItem(DATA_STORAGE_KEY, JSON.stringify(updatedData));
+    });
 };
 
 export function addCardToDeck () {

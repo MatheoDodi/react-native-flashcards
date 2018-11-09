@@ -23,13 +23,13 @@ class Home extends Component {
     const { decks } = this.props;
 
     return (
-        <View style={{alignItems: 'center', flex: 1}}>
+        <View style={{alignItems: 'center', flex: 1, backgroundColor: '#2D3652'}}>
           <FlatList
             contentContainerStyle={{alignItems: 'center', width: Dimensions.get('window').width}}
             data={Object.keys(decks)}
             renderItem={({ item, index }) => 
               <DeckItem
-                gradient={gradientsArray[index]}
+                gradient={gradientsArray[index] ? gradientsArray[index] : gradientsArray[Math.floor(Math.random() * gradientsArray.length)]}
                 title={item}
                 cards={decks[item].questions.length} />}
             keyExtractor={(item, index) => item}

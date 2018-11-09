@@ -38,7 +38,7 @@ const ButtonContainer = styled.View`
 
 const PrimaryButton = styled.TouchableOpacity`
   margin: 5px;
-  background-color: #DA2850;
+  background-color: ${props => props.disabled ? 'gray' : props.color};
   width: 150;
   padding: 20px;
   border-radius: 5;
@@ -78,6 +78,8 @@ class Deck extends Component {
       </LinearGradient>
       <ButtonContainer>
         <PrimaryButton
+          color={gradient[0]}
+          disabled={cards === 0}
           onPress={() => navigation.navigate('Quiz', { deck: title, gradient  })}
           style={{width: 175, shadowRadius: 5 ,shadowOffset: {height: 3}}}>
             <Text style={{textAlign: 'center', color: 'white', fontSize: 25}}>Start Quiz</Text>
