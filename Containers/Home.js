@@ -5,7 +5,7 @@ import { getDecks } from '../utils/helpers';
 import { setDecks } from '../actions'
 import DeckItem from '../Components/DeckItem';
 
-const gradientsArray = [['#6190E8', '#A7BFE8'], ['#CAC531', '#F3F9A7'], ['#11998e', '#38ef7d'], ['#C5796D', '#DBE6F6']];
+const gradientsArray = [['#6190E8', '#A7BFE8'], ['#CAC531', '#F3F9A7'], ['#11998e', '#38ef7d'], ['#C5796D', '#DBE6F6'], ['#67B26F', '#4ca2cd'], ['#536976', '#BBD2C5'], ['#dd3e54', '#6be585']];
 
 
 class Home extends Component {
@@ -21,12 +21,15 @@ class Home extends Component {
 
   render() {
     const { decks } = this.props;
+    const sortedDecks = Object.keys(decks)
+    .sort()
+    console.log(decks);
 
     return (
         <View style={{alignItems: 'center', flex: 1, backgroundColor: '#2D3652'}}>
           <FlatList
             contentContainerStyle={{alignItems: 'center', width: Dimensions.get('window').width}}
-            data={Object.keys(decks)}
+            data={sortedDecks}
             renderItem={({ item, index }) => 
               <DeckItem
                 gradient={gradientsArray[index] ? gradientsArray[index] : gradientsArray[Math.floor(Math.random() * gradientsArray.length)]}

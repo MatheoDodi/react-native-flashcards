@@ -32,7 +32,6 @@ const Subtitle = styled.Text`
 `
 
 const DeckItem = ({ title, cards, navigation, gradient }) => {
-  console.log(title);
 return (
   <TouchableOpacity onPress={() => navigation.navigate('Deck', { title, cards, gradient })}>
     <LinearGradient 

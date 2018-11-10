@@ -11,7 +11,7 @@ import Deck from './Components/Deck';
 import Quiz from './Containers/Quiz';
 import Results from './Components/Results';
 import NewDeck from './Containers/NewDeck';
-import { getDecks } from './utils/helpers';
+import NewQuestion from './Containers/NewQuestion';
 
 const store = createStore(reducer);
 
@@ -68,6 +68,12 @@ const MainNavigator = createStackNavigator({
     screen: Results,
     navigationOptions: {
       header: null
+    }
+  },
+  Question: {
+    screen: NewQuestion,
+    navigationOptions: {
+      title: 'New Question'
     }
   }
 }, {

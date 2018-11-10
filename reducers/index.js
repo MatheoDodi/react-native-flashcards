@@ -23,11 +23,11 @@ export const reducer = (state = {}, action) => {
       return {
         ...state,
         [action.title] : {
-          ...action.title,
-          questions: {
-            ...[action.title].questions,
-            ...action.card
-          }
+          title: action.title,
+          questions: [
+            ...state[action.title].questions,
+            action.card
+          ]
         }
       }
     default : 

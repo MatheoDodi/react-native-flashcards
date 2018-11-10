@@ -27,8 +27,23 @@ export function saveDeckTitle (title) {
     });
 };
 
-export function addCardToDeck () {
+export function addCardToDeck (title, card) {
+  AsyncStorage.getItem(DATA_STORAGE_KEY)
+    .then(res => {
+      const data = JSON.parse(res);
+      const updatedData = {
+        ...data,
+        [title] : {
+          title: title,
+          questions: [
+            ...data[title].questions,
+            card
+          ]
+        }
+      };
 
+      AsyncStorage.setItem(DATA_STORAGE_KEY, JSON.stringify(updatedData));
+    });
 };
 
 function setInitialData (results) {

@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { Text, View, Dimensions, StyleSheet } from 'react-native';
 import { withNavigation, SafeAreaView } from 'react-navigation';
 import { LinearGradient } from 'expo'
-import DeckItem from './DeckItem';
 import styled from 'styled-components/native';
 
 const styles = StyleSheet.create({
@@ -68,8 +68,8 @@ class Deck extends Component {
 
   render() {
   SafeAreaView.setStatusBarHeight(0);
-  const { navigation } = this.props;
-  const { title, cards, gradient } = navigation.state.params;
+  const { navigation, cards } = this.props;
+  const { title, gradient } = navigation.state.params;
   return (
     <View style={{alignItems: 'center', flex: 1}}>
       <LinearGradient colors={gradient} style={styles.gradient}>
@@ -84,11 +84,23 @@ class Deck extends Component {
           style={{width: 175, shadowRadius: 5 ,shadowOffset: {height: 3}}}>
             <Text style={{textAlign: 'center', color: 'white', fontSize: 25}}>Start Quiz</Text>
         </PrimaryButton>
-        <SecondaryButton><Text style={{textAlign: 'center', color: '#DA2850', fontSize: 20}}>Add Card</Text></SecondaryButton>
+        <SecondaryButton 
+          onPress={() => navigation.navigate('Question', { title })}>
+            <Text style={{textAlign: 'center', color: '#DA2850', fontSize: 20}}>Add Card</Text>
+        </SecondaryButton>
       </ButtonContainer>
     </View>
     )
   }
 };
 
-export default withNavigation(Deck);
+const mapStateToProps = (state, { navigation }) => {
+  const { title } = navigation.state.params;
+  const cards = state[title].questions.length;
+
+  return {
+    cards
+  }
+}
+
+export default withNavigation(connect(mapStateToProps)(Deck));
