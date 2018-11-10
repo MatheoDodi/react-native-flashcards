@@ -36,7 +36,7 @@ return (
   <TouchableOpacity onPress={() => navigation.navigate('Deck', { title, cards, gradient })}>
     <LinearGradient 
       style={styles.gradient}
-      colors={gradient}>
+      colors={['#4e54c8', '#8f94fb']}>
         <Title>{title}</Title>
         <Subtitle>{cards} {cards > 1 ? 'cards' : 'card'}</Subtitle>
     </LinearGradient>

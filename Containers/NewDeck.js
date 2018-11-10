@@ -4,6 +4,7 @@ import { Text, View, TextInput, StyleSheet, TouchableOpacity } from 'react-nativ
 import { saveDeckTitleAction } from '../actions';
 import { saveDeckTitle } from '../utils/helpers';
 
+const gradientsArray = [['#6190E8', '#A7BFE8'], ['#CAC531', '#F3F9A7'], ['#11998e', '#38ef7d'], ['#C5796D', '#DBE6F6'], ['#67B26F', '#4ca2cd'], ['#536976', '#BBD2C5'], ['#dd3e54', '#6be585']];
 
 class NewDeck extends Component {
   state = {
@@ -18,8 +19,10 @@ class NewDeck extends Component {
     const { title } = this.state;
     this.props.dispatch(saveDeckTitleAction(title));
     saveDeckTitle(title);
-    this.props.navigation.goBack();
-  };
+    // setTimeout(() => {
+    this.props.navigation.navigate('Deck', { title });
+    // }, 0)
+ };
 
   render() {
     return (
@@ -61,4 +64,8 @@ const styles = StyleSheet.create({
     borderRadius: 5,
   }});
 
-export default connect()(NewDeck);
+const mapStateToProps = state => ({
+  decks: state
+})
+
+export default connect(mapStateToProps)(NewDeck);

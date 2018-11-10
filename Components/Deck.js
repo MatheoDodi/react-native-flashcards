@@ -50,7 +50,7 @@ const PrimaryButton = styled.TouchableOpacity`
 const SecondaryButton = styled.TouchableOpacity`
   margin: 5px;
   background-color: white;
-  border: 1px solid #DA2850;
+  border: 1px solid #4e54c8;
   width: 150;
   padding: 20px;
   border-radius: 5;
@@ -69,24 +69,24 @@ class Deck extends Component {
   render() {
   SafeAreaView.setStatusBarHeight(0);
   const { navigation, cards } = this.props;
-  const { title, gradient } = navigation.state.params;
+  const { title } = navigation.state.params;
   return (
-    <View style={{alignItems: 'center', flex: 1}}>
-      <LinearGradient colors={gradient} style={styles.gradient}>
+    <View style={{alignItems: 'center', flex: 1, backgroundColor: '#2D3652'}}>
+      <LinearGradient colors={['#4e54c8', '#8f94fb']} style={styles.gradient}>
         <Title>{ title }</Title>
         <Subtitle>{ cards } { cards > 1 ? 'cards' : 'card' }</Subtitle>
       </LinearGradient>
       <ButtonContainer>
         <PrimaryButton
-          color={gradient[0]}
+          color={'#8f94fb'}
           disabled={cards === 0}
-          onPress={() => navigation.navigate('Quiz', { deck: title, gradient  })}
+          onPress={() => navigation.navigate('Quiz', { deck: title  })}
           style={{width: 175, shadowRadius: 5 ,shadowOffset: {height: 3}}}>
             <Text style={{textAlign: 'center', color: 'white', fontSize: 25}}>Start Quiz</Text>
         </PrimaryButton>
         <SecondaryButton 
           onPress={() => navigation.navigate('Question', { title })}>
-            <Text style={{textAlign: 'center', color: '#DA2850', fontSize: 20}}>Add Card</Text>
+            <Text style={{textAlign: 'center', color: '#8f94fb', fontSize: 20}}>Add Card</Text>
         </SecondaryButton>
       </ButtonContainer>
     </View>

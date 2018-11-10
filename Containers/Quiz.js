@@ -87,31 +87,42 @@ class Quiz extends Component {
 
   flipCard = () => {
     if ( this.state.questionCounter + 1 === this.props.questions.length && this.state.animationValue >= 90 ) {
-      return this.props.navigation.push('Results', {
+      this.props.navigation.push('Results', {
         right: this.state.right,
         total: this.props.questions.length,
         deck: this.props.deck,
-        gradient: this.props.gradient
       });
-    };
-    if ( this.state.animationValue >= 90 ) {
       Animated.spring(this.state.rotate, {
         toValue: 0,
         friction: 8,
         tension: 10
       }).start();
-      this.nextQuestion();
+      return this.setState(() => ({
+        right: 0,
+        wrong: 0,
+        questionCounter : 0,
+        animationValue: 0
+      }))
+    };
+    if ( this.state.animationValue >= 90 ) {
+      Animated.spring(this.state.rotate, {
+        toValue: 0,
+        friction: 8,
+        tension: 5
+      }).start();
+      setTimeout(this.nextQuestion, 180);
     } else {
       Animated.spring(this.state.rotate, {
         toValue: 180,
         friction: 8,
-        tension: 10
+        tension: 5
       }).start();
     }
   }
 
   render() {
     const { questions } = this.props;
+    console.log(questions);
     const { questionCounter } = this.state;
     let question = null;
     let answer = null;
@@ -134,16 +145,16 @@ class Quiz extends Component {
       <View style={{flex: 1, alignItems: 'center'}}>
         <View>
           <Animated.View 
-            style={[styles.QuizCard, frontAnimatedStyle, {backgroundColor: this.props.gradient[1]}]}>
-              {question && <Title>{question}</Title>}
+            style={[styles.QuizCard, frontAnimatedStyle, {backgroundColor: '#8f94fb'}]}>
+              <Title>{question}</Title>
               <Text style={{marginTop: 20}}>
               {questionCounter + 1 > questions.length ? questions.length : questionCounter + 1} / {questions.length}
               </Text>
           </Animated.View>
           <Animated.View
-            color={this.props.gradient[1]}
-            style={[styles.QuizCard, backAnimatedStyle, {backgroundColor: this.props.gradient[1], position: 'absolute', top: 0, left: 0}]}>
-              {answer ? <Title>{answer}</Title> : <Title>Answer Done</Title>}
+            color={'#8f94fb'}
+            style={[styles.QuizCard, backAnimatedStyle, {backgroundColor: '#8f94fb', position: 'absolute', top: 0, left: 0}]}>
+              <Title>{answer}</Title>
             <Text style={{marginTop: 20}}>
               {questionCounter + 1 > questions.length ? questions.length : questionCounter + 1} / {questions.length}
             </Text>
@@ -154,9 +165,9 @@ class Quiz extends Component {
           </Animated.View>
         </View>
         <AnswerButton 
-          color={this.props.gradient[1]}
+          color={'#8f94fb'}
           onPress={this.flipCard}>
-            <Text style={{textAlign: 'center', color: this.props.gradient[1], fontSize: 20}}>
+            <Text style={{textAlign: 'center', color: '#8f94fb', fontSize: 20}}>
             { questionCounter + 1 === questions.length && this.state.animationValue >= 90
               ? 'View Results'
                 : this.state.animationValue >= 90 
@@ -169,12 +180,11 @@ class Quiz extends Component {
 };
 
 const mapStateToProps = (state, { navigation }) => {
-  const { deck, gradient } = navigation.state.params;
+  const { deck } = navigation.state.params;
   const questions = state[deck].questions;
 
   return {
     deck,
-    gradient,
     questions
   };
 };

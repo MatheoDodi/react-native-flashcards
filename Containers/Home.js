@@ -23,7 +23,6 @@ class Home extends Component {
     const { decks } = this.props;
     const sortedDecks = Object.keys(decks)
     .sort()
-    console.log(decks);
 
     return (
         <View style={{alignItems: 'center', flex: 1, backgroundColor: '#2D3652'}}>
@@ -32,7 +31,6 @@ class Home extends Component {
             data={sortedDecks}
             renderItem={({ item, index }) => 
               <DeckItem
-                gradient={gradientsArray[index] ? gradientsArray[index] : gradientsArray[Math.floor(Math.random() * gradientsArray.length)]}
                 title={item}
                 cards={decks[item].questions.length} />}
             keyExtractor={(item, index) => item}

@@ -39,22 +39,27 @@ const HomeButton = styled.TouchableOpacity`
 `
 
 const Results = ({ navigation }) => {
-  const { right, total, deck, gradient } = navigation.state.params;
-  console.log(right, total);
-  const rightPerc = ( right / total ) * 100;
+  const { right, total, deck } = navigation.state.params;
+  const rightPerc = (( right / total ) * 100).toFixed();
 
   return (
     <View style={{alignItems: 'center', flex: 1}}>
       <LinearGradient
-        colors={gradient}
+        colors={['#4e54c8', '#8f94fb']}
         style={styles.gradient}>
           <Title>{deck}</Title>
           <Title style={{color: '#414345', fontSize: 25, marginTop: 10}}>{rightPerc}% correct answers</Title>
           <Title style={{color: '#414345', fontSize: 25, marginTop: 10}}>{rightPerc >= 50 ? 'Good Job!' : 'Better luck next time!'}</Title>
           <HomeButton
-            onPress={() => navigation.popToTop()}
-            color={gradient[1]}>
-              <Text style={{textAlign: 'center', color: gradient[1], fontSize: 20}}>Home</Text>
+            style={{backgroundColor: '#4e54c8'}}
+            onPress={() => navigation.pop(1, { deck })}
+            color={'#8f94fb'}>
+              <Text style={{textAlign: 'center', color: '#FFF', fontSize: 20}}>Play Again</Text>
+          </HomeButton>
+          <HomeButton
+            onPress={() => navigation.pop(2, { title: deck })}
+            color={'#8f94fb'}>
+              <Text style={{textAlign: 'center', color: '#8f94fb', fontSize: 20}}>Back to Deck</Text>
           </HomeButton>
       </LinearGradient>
     </View>

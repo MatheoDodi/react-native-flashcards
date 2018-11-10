@@ -24,6 +24,7 @@ class NewQuestion extends Component {
     };
     this.props.dispatch(addCardToDeckAction(title, card));
     addCardToDeck(title, card);
+    this.setState(() => ({ question: '', answer: '' }));
     this.props.navigation.goBack();
   };
 
