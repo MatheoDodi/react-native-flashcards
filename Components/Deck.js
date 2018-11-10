@@ -29,7 +29,7 @@ const Title = styled.Text`
 
 const Subtitle = styled.Text`
   font-size: 17;
-  color: #DA2850;
+  color: #000;
 `
 
 const ButtonContainer = styled.View`
