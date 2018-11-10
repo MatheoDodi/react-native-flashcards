@@ -27,7 +27,8 @@ class NewDeck extends Component {
   render() {
     return (
       <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
-        <Text style={{fontSize: 25}}>Create a new Deck</Text>
+        <Text style={{fontSize: 25, marginBottom: 30}}>Create a new Deck</Text>
+        {!this.state.title && <Text style={{color: 'gray'}}>Required</Text>}
         <TextInput
           style={styles.input}
           value={this.state.title}
@@ -35,7 +36,7 @@ class NewDeck extends Component {
           placeholder = "Deck Name"
           placeholderTextColor = "#171F33"
           autoCapitalize = "none"/>
-        <TouchableOpacity onPress={this.submitHandler} style={styles.btn}>
+        <TouchableOpacity disabled={!this.state.title} onPress={this.submitHandler} style={styles.btn}>
           <Text style={{color: 'white', textAlign: 'center'}}>
             Create
           </Text>
@@ -48,7 +49,7 @@ class NewDeck extends Component {
 const styles = StyleSheet.create({
   input: {
      textAlign: 'center',
-     margin: 25,
+     marginBottom: 25,
      padding: 10,
      width: 200,
      borderColor: '#171F33',

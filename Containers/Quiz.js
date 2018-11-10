@@ -142,7 +142,7 @@ class Quiz extends Component {
     }
 
     return (
-      <View style={{flex: 1, alignItems: 'center'}}>
+      <View style={{flex: 1, alignItems: 'center', backgroundColor: '#2D3652'}}>
         <View>
           <Animated.View 
             style={[styles.QuizCard, frontAnimatedStyle, {backgroundColor: '#8f94fb'}]}>

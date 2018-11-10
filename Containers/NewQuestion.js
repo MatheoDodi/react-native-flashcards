@@ -24,14 +24,15 @@ class NewQuestion extends Component {
     };
     this.props.dispatch(addCardToDeckAction(title, card));
     addCardToDeck(title, card);
-    this.setState(() => ({ question: '', answer: '' }));
     this.props.navigation.goBack();
+    this.setState(() => ({ question: '', answer: '' }));
   };
 
   render() {
     return (
       <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
-        <Text style={{fontSize: 25}}>Add a new Card</Text>
+        <Text style={{fontSize: 25, marginBottom: 30}}>Add a new Card</Text>
+        {!this.state.question && <Text style={{color: 'gray'}}>Required</Text>}
         <TextInput
           style={styles.input}
           value={this.state.question}
@@ -39,6 +40,7 @@ class NewQuestion extends Component {
           placeholder = "Question"
           placeholderTextColor = "#171F33"
           autoCapitalize = "none" />
+        {!this.state.answer && <Text style={{color: 'gray'}}>Required</Text>}
         <TextInput
           style={styles.input}
           value={this.state.answer}
@@ -46,7 +48,7 @@ class NewQuestion extends Component {
           placeholder = "Answer"
           placeholderTextColor = "#171F33"
           autoCapitalize = "none" />
-        <TouchableOpacity onPress={this.submitHandler} style={styles.btn}>
+        <TouchableOpacity disabled={!this.state.question && !this.state.answer} onPress={this.submitHandler} style={styles.btn}>
           <Text style={{color: 'white', textAlign: 'center'}}>
             Create
           </Text>
@@ -59,7 +61,7 @@ class NewQuestion extends Component {
 const styles = StyleSheet.create({
   input: {
      textAlign: 'center',
-     margin: 25,
+     marginBottom: 25,
      padding: 10,
      width: .9 * Dimensions.get('window').width,
      borderColor: '#171F33',

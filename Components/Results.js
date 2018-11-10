@@ -43,7 +43,7 @@ const Results = ({ navigation }) => {
   const rightPerc = (( right / total ) * 100).toFixed();
 
   return (
-    <View style={{alignItems: 'center', flex: 1}}>
+    <View style={{alignItems: 'center', flex: 1, backgroundColor: '#2D3652'}}>
       <LinearGradient
         colors={['#4e54c8', '#8f94fb']}
         style={styles.gradient}>
