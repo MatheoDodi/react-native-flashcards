@@ -4,8 +4,6 @@ import { Text, View, TextInput, StyleSheet, TouchableOpacity } from 'react-nativ
 import { saveDeckTitleAction } from '../actions';
 import { saveDeckTitle } from '../utils/helpers';
 
-const gradientsArray = [['#6190E8', '#A7BFE8'], ['#CAC531', '#F3F9A7'], ['#11998e', '#38ef7d'], ['#C5796D', '#DBE6F6'], ['#67B26F', '#4ca2cd'], ['#536976', '#BBD2C5'], ['#dd3e54', '#6be585']];
-
 class NewDeck extends Component {
   state = {
     title: ''
@@ -19,9 +17,8 @@ class NewDeck extends Component {
     const { title } = this.state;
     this.props.dispatch(saveDeckTitleAction(title));
     saveDeckTitle(title);
-    // setTimeout(() => {
     this.props.navigation.navigate('Deck', { title });
-    // }, 0)
+    this.setState(() => ({ title: '' }));
  };
 
   render() {
@@ -33,9 +30,9 @@ class NewDeck extends Component {
           style={styles.input}
           value={this.state.title}
           onChangeText={this.inputHandler}
-          placeholder = "Deck Name"
-          placeholderTextColor = "#171F33"
-          autoCapitalize = "none"/>
+          placeholder = 'Deck Name'
+          placeholderTextColor = 'gray'
+          autoCapitalize = 'none'/>
         <TouchableOpacity disabled={!this.state.title} onPress={this.submitHandler} style={styles.btn}>
           <Text style={{color: 'white', textAlign: 'center'}}>
             Create
