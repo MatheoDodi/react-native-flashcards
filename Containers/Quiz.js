@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { clearLocalNotification, setLocalNotification } from '../utils/helpers';
 import { View, Text, TouchableOpacity, Dimensions, Animated, StyleSheet } from 'react-native';
 import styled from 'styled-components/native';
 
@@ -43,7 +44,6 @@ const Title = styled.Text`
 class Quiz extends Component {
   state = {
     right: 0,
-    wrong: 0,
     questionCounter : 0,
     rotate : new Animated.Value(0),
     animationValue: 0
@@ -79,12 +79,6 @@ class Quiz extends Component {
     }));
   };
 
-  wrongAnswer = () => {
-    this.setState(prevState => ({
-      wrong: prevState.wrong + 1
-    }));
-  };
-
   flipCard = () => {
     if ( this.state.questionCounter + 1 === this.props.questions.length && this.state.animationValue >= 90 ) {
       this.props.navigation.push('Results', {
@@ -92,6 +86,12 @@ class Quiz extends Component {
         total: this.props.questions.length,
         deck: this.props.deck,
       });
+
+      // clearing and setting Notifications
+
+      clearLocalNotification()
+        .then(setLocalNotification);
+      
       Animated.spring(this.state.rotate, {
         toValue: 0,
         friction: 8,
@@ -99,7 +99,6 @@ class Quiz extends Component {
       }).start();
       return this.setState(() => ({
         right: 0,
-        wrong: 0,
         questionCounter : 0,
         animationValue: 0
       }))

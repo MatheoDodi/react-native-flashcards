@@ -2,6 +2,7 @@ import React from 'react';
 import { createStore } from 'redux';
 import { Provider } from 'react-redux';
 import { reducer } from './reducers';
+import { setLocalNotification } from './utils/helpers';
 import { View, StatusBar } from 'react-native';
 import { createBottomTabNavigator ,createStackNavigator  } from 'react-navigation';
 import { Constants } from 'expo';
@@ -43,10 +44,10 @@ const Drawer = createBottomTabNavigator({
   }
 }}, {
 	tabBarOptions: {
-    activeTintColor: '#F8F8F8', // active icon color
-    inactiveTintColor: '#586589',  // inactive icon color
+    activeTintColor: '#F8F8F8',
+    inactiveTintColor: '#586589',
     style: {
-        backgroundColor: '#171F33' // TabBar background
+        backgroundColor: '#171F33'
     }
   }
 });
@@ -86,6 +87,9 @@ const MainNavigator = createStackNavigator({
 });
 
 class App extends React.Component {
+  componentDidMount () {
+    setLocalNotification();
+  }
 
   render() {
     return (
