@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Text, View, Dimensions, StyleSheet } from 'react-native';
 import { withNavigation, SafeAreaView } from 'react-navigation';
-import { LinearGradient } from 'expo'
-import styled from 'styled-components/native';
+import { LinearGradient } from 'expo';
+import { Title, Subtitle, ButtonContainer, PrimaryButton, SecondaryButton } from '../utils/styles';
 
 const styles = StyleSheet.create({
   gradient : {
@@ -20,44 +20,6 @@ const styles = StyleSheet.create({
   shadowOffset: {height: 10}, 
   width: .95 * Dimensions.get('window').width
 }});
-
-const Title = styled.Text`
-  font-size: 35;
-  margin-bottom: 10px;
-  color: #FBF9FB;
-`
-
-const Subtitle = styled.Text`
-  font-size: 17;
-  color: #000;
-`
-
-const ButtonContainer = styled.View`
-  align-items: center;
-`
-
-const PrimaryButton = styled.TouchableOpacity`
-  margin: 5px;
-  background-color: ${props => props.disabled ? 'gray' : props.color};
-  width: 150;
-  padding: 20px;
-  border-radius: 5;
-  shadow-color: #000;
-  shadow-radius: 6;
-  shadow-opacity: .2;
-`
-
-const SecondaryButton = styled.TouchableOpacity`
-  margin: 5px;
-  background-color: white;
-  border: 1px solid #4e54c8;
-  width: 150;
-  padding: 20px;
-  border-radius: 5;
-  shadow-color: #000;
-  shadow-radius: 6;
-  shadow-opacity: .2;
-`
 
 class Deck extends Component {
   static navigationOptions = ({ navigation }) => {

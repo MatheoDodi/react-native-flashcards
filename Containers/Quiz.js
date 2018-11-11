@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { clearLocalNotification, setLocalNotification } from '../utils/helpers';
 import { View, Text, TouchableOpacity, Dimensions, Animated, StyleSheet } from 'react-native';
-import styled from 'styled-components/native';
+import { AnswerButton, QuestionText } from '../utils/styles';
 
 const styles = StyleSheet.create({
   QuizCard : {
@@ -20,26 +20,6 @@ const styles = StyleSheet.create({
     width: .95 * Dimensions.get('window').width,
     backfaceVisibility: 'hidden'
 }});
-
-const AnswerButton = styled.TouchableOpacity`
-  margin: 5px;
-  background-color: #414345;
-  border: 1px solid ${props => props.color};
-  width: 150;
-  padding: 20px;
-  border-radius: 5;
-  shadow-color: ${props => props.color};
-  shadow-radius: 10;
-  shadow-opacity: .95;
-`
-
-const Title = styled.Text`
-  text-align: center;
-  font-size: 25;
-  margin-bottom: 10px;
-  color: #414345;
-`
-
 
 class Quiz extends Component {
   state = {
@@ -121,7 +101,6 @@ class Quiz extends Component {
 
   render() {
     const { questions } = this.props;
-    console.log(questions);
     const { questionCounter } = this.state;
     let question = null;
     let answer = null;
@@ -145,7 +124,7 @@ class Quiz extends Component {
         <View>
           <Animated.View 
             style={[styles.QuizCard, frontAnimatedStyle, {backgroundColor: '#8f94fb'}]}>
-              <Title>{question}</Title>
+              <QuestionText>{question}</QuestionText>
               <Text style={{marginTop: 20}}>
               {questionCounter + 1 > questions.length ? questions.length : questionCounter + 1} / {questions.length}
               </Text>
@@ -153,7 +132,7 @@ class Quiz extends Component {
           <Animated.View
             color={'#8f94fb'}
             style={[styles.QuizCard, backAnimatedStyle, {backgroundColor: '#8f94fb', position: 'absolute', top: 0, left: 0}]}>
-              <Title>{answer}</Title>
+              <QuestionText>{answer}</QuestionText>
             <Text style={{marginTop: 20}}>
               {questionCounter + 1 > questions.length ? questions.length : questionCounter + 1} / {questions.length}
             </Text>

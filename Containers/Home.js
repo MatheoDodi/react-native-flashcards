@@ -5,9 +5,6 @@ import { getDecks } from '../utils/helpers';
 import { setDecks } from '../actions'
 import DeckItem from '../Components/DeckItem';
 
-const gradientsArray = [['#6190E8', '#A7BFE8'], ['#CAC531', '#F3F9A7'], ['#11998e', '#38ef7d'], ['#C5796D', '#DBE6F6'], ['#67B26F', '#4ca2cd'], ['#536976', '#BBD2C5'], ['#dd3e54', '#6be585']];
-
-
 class Home extends Component {
   static navigationOptions = {
     header: null

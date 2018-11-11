@@ -1,14 +1,7 @@
 import React from 'react';
 import { View, StyleSheet, Text, Dimensions } from 'react-native';
 import { LinearGradient } from 'expo';
-import styled from 'styled-components';
-import Home from '../Containers/Home';
-
-const Title = styled.Text`
-  font-size: 35;
-  margin-bottom: 10px;
-  color: #FBF9FB;
-`
+import { Title, HomeButton } from '../utils/styles';
 
 const styles = StyleSheet.create({
   gradient : {
@@ -25,18 +18,6 @@ const styles = StyleSheet.create({
   height: .88 * Dimensions.get('window').height,
   width: .95 * Dimensions.get('window').width
 }});
-
-const HomeButton = styled.TouchableOpacity`
-  margin: 5px;
-  background-color: #414345;
-  border: 1px solid ${props => props.color};
-  width: 150;
-  padding: 20px;
-  border-radius: 5;
-  shadow-color: ${props => props.color};
-  shadow-radius: 10;
-  shadow-opacity: .95;
-`
 
 const Results = ({ navigation }) => {
   const { right, total, deck } = navigation.state.params;
