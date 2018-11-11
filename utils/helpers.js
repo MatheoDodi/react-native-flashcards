@@ -1,5 +1,8 @@
+import React from 'react';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { AsyncStorage } from 'react-native';
 import { Notifications, Permissions } from 'expo';
+import Results from '../Components/Results';
 
 const DATA_STORAGE_KEY = 'flashcardsDataStorage:key';
 const NOTIFICATIONS_KEY = 'flashcardsNotifications:key';
@@ -141,4 +144,80 @@ export function setLocalNotification () {
           });
       };
     });
+};
+
+export const navTabRoutes = (Home, NewDeck) => {
+  return { 
+    Main: {
+    screen: Home,
+    navigationOptions: {
+      tabBarLabel: 'Decks',
+      tabBarIcon: ({tintColor}) => (
+          <MaterialCommunityIcons
+              name="library-books"
+              color={tintColor}
+              size={24}
+          />
+      )
+  }
+},
+  NewDeck: {
+    screen: NewDeck,
+    navigationOptions: {
+      tabBarLabel: 'New Deck',
+      tabBarIcon: ({tintColor}) => (
+          <MaterialCommunityIcons
+              name="plus-box"
+              color={tintColor}
+              size={24}
+          />
+      )
+  }
+}};
+};
+
+export const navTabOptions = {
+	tabBarOptions: {
+    activeTintColor: '#F8F8F8',
+    inactiveTintColor: '#586589',
+    style: {
+        backgroundColor: '#171F33'
+    }
+  }
+};
+
+export const stackNavRoutes = (Home, Deck, Quiz, Results, NewQuestion ) => ({
+  Home: {
+    screen: Home,
+    navigationOptions: {
+      header: null
+    }
+  },
+  Deck: {
+    screen: Deck,
+  },
+  Quiz: {
+    screen: Quiz
+  },
+  Results: {
+    screen: Results,
+    navigationOptions: {
+      header: null
+    }
+  },
+  Question: {
+    screen: NewQuestion,
+    navigationOptions: {
+      title: 'New Question'
+    }
+  }
+});
+
+export const stackNavOptions = {
+  navigationOptions: {
+    headerTintColor: '#FFFFFF',
+    headerStyle: {
+      backgroundColor: "#171F33"
+    }
+  }
 };

@@ -2,11 +2,10 @@ import React from 'react';
 import { createStore } from 'redux';
 import { Provider } from 'react-redux';
 import { reducer } from './reducers';
-import { setLocalNotification } from './utils/helpers';
-import { View, StatusBar } from 'react-native';
-import { createBottomTabNavigator ,createStackNavigator  } from 'react-navigation';
+import { setLocalNotification, navTabRoutes, navTabOptions, stackNavRoutes, stackNavOptions } from './utils/helpers';
+import { View, StatusBar, Platform } from 'react-native';
+import { createBottomTabNavigator ,createStackNavigator, createMaterialTopTabNavigator  } from 'react-navigation';
 import { Constants } from 'expo';
-import { MaterialCommunityIcons } from '@expo/vector-icons';
 import Home from './Containers/Home';
 import Deck from './Components/Deck';
 import Quiz from './Containers/Quiz';
@@ -16,75 +15,14 @@ import NewQuestion from './Containers/NewQuestion';
 
 const store = createStore(reducer);
 
-const Drawer = createBottomTabNavigator({
-  Main: {
-    screen: Home,
-    navigationOptions: {
-      tabBarLabel: 'Decks',
-      tabBarIcon: ({tintColor}) => (
-          <MaterialCommunityIcons
-              name="library-books"
-              color={tintColor}
-              size={24}
-          />
-      )
-  }
-},
-  NewDeck: {
-    screen: NewDeck,
-    navigationOptions: {
-      tabBarLabel: 'New Deck',
-      tabBarIcon: ({tintColor}) => (
-          <MaterialCommunityIcons
-              name="plus-box"
-              color={tintColor}
-              size={24}
-          />
-      )
-  }
-}}, {
-	tabBarOptions: {
-    activeTintColor: '#F8F8F8',
-    inactiveTintColor: '#586589',
-    style: {
-        backgroundColor: '#171F33'
-    }
-  }
-});
+const TabNav = Platform.OS === 'ios' 
+  ? createBottomTabNavigator(navTabRoutes(Home, NewDeck), navTabOptions)
+  : createMaterialTopTabNavigator(navTabRoutes(Home, NewDeck), navTabOptions);
 
-const MainNavigator = createStackNavigator({
-  Home: {
-    screen: Drawer,
-    navigationOptions: {
-      header: null
-    }
-  },
-  Deck: {
-    screen: Deck,
-  },
-  Quiz: {
-    screen: Quiz
-  },
-  Results: {
-    screen: Results,
-    navigationOptions: {
-      header: null
-    }
-  },
-  Question: {
-    screen: NewQuestion,
-    navigationOptions: {
-      title: 'New Question'
-    }
-  }
-}, {
-  navigationOptions: {
-    headerTintColor: '#FFFFFF',
-    headerStyle: {
-      backgroundColor: "#171F33"
-    }
-  }
-});
+
+const MainNavigator = createStackNavigator(stackNavRoutes(
+  TabNav, Deck, Quiz, Results, NewQuestion
+  ), stackNavOptions);
 
 class App extends React.Component {
   componentDidMount () {
