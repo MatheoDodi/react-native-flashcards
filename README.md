@@ -1,6 +1,6 @@
 # Flashcards
 
-iOS App made with React Native.
+iOS / Android App made with React Native.
 
 My take on the classic Flashcards concept. User should be able to :
 
@@ -14,6 +14,7 @@ Project was bootstrapped with create-react-native-app.
 
 To get started using the app:
 
+* install and download Xcode
 * git clone or download the repo on your local machine
 * open the terminal and navigate to the location of the repo
 * install all project dependencies with `npm install`
